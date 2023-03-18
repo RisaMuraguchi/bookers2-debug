@@ -29,6 +29,10 @@
           </td>
         </tr>
       </table>
+      <%= form_with model: [@book, @book_comment] do |f| %>
+           <%= f.text_area :comment, rows: '5', cols: '85' %>
+           <%= f.submit "送信" %>
+      <% end %>
     </div>
   </div>
 </div>
