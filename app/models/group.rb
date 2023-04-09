@@ -14,4 +14,8 @@ class Group < ApplicationRecord
     image.variant(resize_to_limit: [width, height]).processed
   end
 
+  def is_owned_by?(user)
+    owner.id == user.id
+  end
+
 end
