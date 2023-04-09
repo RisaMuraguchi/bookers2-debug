@@ -24,9 +24,9 @@ class GroupsController < ApplicationController
     else
       render 'new'
     end
+  end
 
   def edit
-    @group = Group.find(params[:id])
   end
 
   def update
@@ -37,8 +37,6 @@ class GroupsController < ApplicationController
     end
   end
 
-
-  end
 
 
   private
