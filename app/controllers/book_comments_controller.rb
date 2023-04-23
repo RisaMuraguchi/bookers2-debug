@@ -14,6 +14,7 @@ class BookCommentsController < ApplicationController
   end
 
 
+
   private
 
   def book_comment_params
