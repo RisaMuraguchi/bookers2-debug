@@ -8,15 +8,20 @@ class User < ApplicationRecord
   has_one_attached :profile_image
   has_many :book_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
- 
 
+  # フォローフォロワーのアソシエーション
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
 
   has_many :followings, through: :relationships, source: :followed
   has_many :followers, through: :reverse_of_relationships, source: :follower
 
+  # コミュニティグループのアソシエーション
   has_many :group_users, dependent: :destroy
+
+  # DM機能のアソシエーション
+  has_many :messages, dependent: :destroy
+  has_many :entries, dependent: :destroy
 
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
   validates :introduction, length: { maximum: 50 }
@@ -26,6 +31,7 @@ class User < ApplicationRecord
     (profile_image.attached?) ? profile_image : 'no_image.jpg'
   end
 
+  # フォローフォロワー機能
   def follow(user_id)
   relationships.create(followed_id: user_id)
   end
